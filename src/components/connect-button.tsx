@@ -1,7 +1,7 @@
 "use client";
 
 import { usePrivy } from '@privy-io/react-auth';
-import { LogOut, Wallet, ShieldCheck } from 'lucide-react';
+import { LogOut, Wallet, ShieldCheck, User } from 'lucide-react';
 import Link from 'next/link';
 import { isAuthorizedAdmin } from '@/lib/admin';
 
@@ -54,8 +54,8 @@ export function ConnectButton() {
       onClick={login}
       className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground font-bold text-sm rounded-full hover:scale-105 hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95"
     >
-      <Wallet className="w-4 h-4" />
-      Connect Wallet
+      <User className="w-4 h-4" />
+      Log In
     </button>
   );
 }

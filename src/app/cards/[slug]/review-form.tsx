@@ -90,7 +90,7 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
           onClick={login}
           className="bg-foreground text-background font-bold text-xs px-5 py-2 rounded-full hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md"
         >
-          Connect Wallet to Review
+          Log In to Review
         </button>
       </div>
     );
