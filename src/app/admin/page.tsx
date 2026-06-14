@@ -281,8 +281,9 @@ CRITICAL RULES:
 3. Return raw JSON only.`,
                               { model: 'x-ai/grok-4.3' }
                             );
-                            const textContent = response?.message?.content;
-                            if (!textContent) throw new Error("Empty response from Puter AI");
+                            const rawContent = response?.message?.content;
+                            if (!rawContent) throw new Error("Empty response from Puter AI");
+                            const textContent = String(rawContent);
 
                             const fd = new FormData();
                             const token = await getAccessToken();
