@@ -199,7 +199,8 @@ export async function handleAddCard(formData: FormData) {
     upvotes: 0,
     downvotes: 0,
     description: '',
-    website_url: ''
+    website_url: '',
+    created_at: new Date().toISOString()
   };
 
   try {
