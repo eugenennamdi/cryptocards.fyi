@@ -1,49 +1,39 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #0f172a; /* slate-900 */
+    --card: #ffffff;
+    --card-foreground: #0f172a; /* slate-900 */
+    --border: #e2e8f0; /* slate-200 */
+    --primary: #2563eb; /* Polished Cobalt */
+    --primary-foreground: #ffffff;
+    --muted: #f8fafc; /* slate-50 */
+    --muted-foreground: #64748b; /* slate-500 */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #111116; /* Lighter, subtle cool tint */
+    --foreground: #fafafa;
+    --card: #18181f; /* Elevated card color */
+    --card-foreground: #fafafa;
+    --border: #2a2a35;
+    --primary: #3b82f6; /* Polished Cobalt */
+    --primary-foreground: #ffffff;
+    --muted: #1e1e26;
+    --muted-foreground: #a1a1aa;
   }
 }
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-muted selection:text-foreground;
   }
 }
