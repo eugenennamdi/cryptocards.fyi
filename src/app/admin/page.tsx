@@ -1,7 +1,7 @@
 'use client';
 
 import { usePrivy } from '@privy-io/react-auth';
-import { ADMIN_WALLET } from '@/lib/admin';
+import { isAuthorizedAdmin } from '@/lib/admin';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fetchAdminData, handleApproveSubmission, handleRejectSubmission, handleUpdateCard, handleDeleteCard, handleMarkCardVerified, handleClearCardEdits, handleAIDataSync, handleSavePuterSync, handleAddCard } from '@/app/actions';
@@ -25,7 +25,7 @@ export default function AdminPage() {
   useEffect(() => {
     if (!ready) return;
 
-    if (!authenticated || user?.wallet?.address !== ADMIN_WALLET) {
+    if (!authenticated || !isAuthorizedAdmin(user?.wallet?.address)) {
       router.replace('/'); // Stealth mode: Redirect unauthorized users immediately
       return;
     }
@@ -46,7 +46,7 @@ export default function AdminPage() {
     loadData();
   }, [ready, authenticated, user, router]);
 
-  if (!ready || isLoading || !authenticated || user?.wallet?.address !== ADMIN_WALLET) {
+  if (!ready || isLoading || !authenticated || !isAuthorizedAdmin(user?.wallet?.address)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-primary animate-spin" />

@@ -61,8 +61,8 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
   if (isSuccess) {
     return (
       <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-8 text-center shadow-sm">
-        <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle2 className="w-8 h-8 text-green-500" />
+        <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+          <CheckCircle2 className="w-6 h-6 text-green-500" />
         </div>
         <h3 className="text-xl font-bold text-foreground mb-2">Review Published</h3>
         <p className="text-muted-foreground">Your feedback has been verified and added to the community consensus.</p>
@@ -78,17 +78,17 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
 
   if (!authenticated) {
     return (
-      <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm flex flex-col items-center">
-        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-          <ShieldAlert className="w-8 h-8 text-primary" />
+      <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm flex flex-col items-center">
+        <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mb-3">
+          <ShieldAlert className="w-5 h-5 text-primary" />
         </div>
-        <h3 className="text-xl font-bold mb-2">Verified Reviews Only</h3>
+        <h3 className="text-lg font-bold mb-1">Verified Reviews Only</h3>
         <p className="text-muted-foreground text-sm mb-6 max-w-sm">
           To prevent spam and ensure authentic community feedback, we require users to connect a wallet before leaving a review.
         </p>
         <button 
           onClick={login}
-          className="bg-foreground text-background font-bold text-sm px-6 py-3 rounded-full hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all w-full max-w-xs shadow-lg"
+          className="bg-foreground text-background font-bold text-xs px-5 py-2 rounded-full hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-md"
         >
           Connect Wallet to Review
         </button>
@@ -97,15 +97,15 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
   }
 
   return (
-    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-sm">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 bg-primary/10 rounded-lg">
-          <MessageSquareQuote className="w-5 h-5 text-primary" />
+    <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="p-1.5 bg-primary/10 rounded-md">
+          <MessageSquareQuote className="w-4 h-4 text-primary" />
         </div>
-        <h3 className="text-xl font-bold">Share Your Experience</h3>
+        <h3 className="text-base font-bold">Share Your Experience</h3>
       </div>
       
-      <form action={onSubmit} className="space-y-6">
+      <form action={onSubmit} className="space-y-4">
         {error && (
           <div className="bg-red-500/10 border border-red-500/20 text-red-500 px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> {error}
@@ -113,8 +113,8 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
         )}
 
         <div>
-          <label className="block text-sm font-bold text-foreground mb-3">Overall Rating</label>
-          <div className="flex items-center gap-1.5 bg-background border border-border w-fit px-4 py-2 rounded-full">
+          <label className="block text-xs font-bold text-foreground mb-1.5">Overall Rating</label>
+          <div className="flex items-center gap-1 bg-background border border-border w-fit px-3 py-1.5 rounded-full">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
                 key={star}
@@ -125,7 +125,7 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
                 onMouseLeave={() => setHoveredRating(0)}
               >
                 <Star 
-                  className={`w-7 h-7 transition-colors ${
+                  className={`w-5 h-5 transition-colors ${
                     star <= (hoveredRating || rating) 
                       ? 'fill-yellow-400 text-yellow-400' 
                       : 'text-muted-foreground/30'
@@ -137,34 +137,34 @@ export function ReviewForm({ cardId, cardSlug }: { cardId: string, cardSlug: str
         </div>
 
         <div>
-          <label htmlFor="author_name" className="block text-sm font-bold text-foreground mb-2">Display Name <span className="text-muted-foreground font-normal">(Optional)</span></label>
+          <label htmlFor="author_name" className="block text-xs font-bold text-foreground mb-1">Display Name <span className="text-muted-foreground font-normal">(Optional)</span></label>
           <input 
             type="text" 
             id="author_name" 
             name="author_name" 
             placeholder="e.g. CryptoUser99"
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-medium"
+            className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all font-medium"
           />
         </div>
 
         <div>
-          <label htmlFor="review_text" className="block text-sm font-bold text-foreground mb-2">Detailed Review <span className="text-muted-foreground font-normal">(Optional)</span></label>
+          <label htmlFor="review_text" className="block text-xs font-bold text-foreground mb-1">Detailed Review <span className="text-muted-foreground font-normal">(Optional)</span></label>
           <textarea 
             id="review_text" 
             name="review_text" 
-            rows={4}
-            placeholder="How was the onboarding? What are the hidden fees? Are the rewards worth it? Share your objective experience..."
-            className="w-full bg-background border border-border rounded-xl px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-medium resize-y"
+            rows={2}
+            placeholder="Share your objective experience..."
+            className="w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all font-medium resize-y"
           />
         </div>
 
         <button 
           type="submit" 
           disabled={isSubmitting}
-          className="w-full bg-foreground text-background font-black text-base py-4 rounded-full hover:opacity-90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+          className="w-full bg-foreground text-background font-bold text-sm py-2.5 rounded-full hover:opacity-90 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm"
         >
           {isSubmitting ? (
-            <><Loader2 className="w-5 h-5 animate-spin" /> Publishing...</>
+            <><Loader2 className="w-4 h-4 animate-spin" /> Publishing...</>
           ) : (
             'Publish Review'
           )}

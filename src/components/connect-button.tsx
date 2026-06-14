@@ -3,7 +3,7 @@
 import { usePrivy } from '@privy-io/react-auth';
 import { LogOut, Wallet, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
-import { ADMIN_WALLET } from '@/lib/admin';
+import { isAuthorizedAdmin } from '@/lib/admin';
 
 export function ConnectButton() {
   const { ready, authenticated, user, login, logout } = usePrivy();
@@ -19,7 +19,7 @@ export function ConnectButton() {
       ? `${address.slice(0, 6)}...${address.slice(-4)}`
       : 'Connected';
       
-    const isAdmin = address.toLowerCase() === ADMIN_WALLET.toLowerCase();
+    const isAdmin = isAuthorizedAdmin(address);
 
     return (
       <div className="flex items-center gap-3">

@@ -34,15 +34,16 @@ export default async function HomePage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-16">
         {/* Hero Section */}
-        <div className="max-w-4xl mx-auto pb-10 sm:pb-12 text-center">
+        <div className="max-w-4xl mx-auto pb-12 sm:pb-16 text-center relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-primary/20 blur-[100px] rounded-full -z-10 pointer-events-none" />
           <HeroAnimation>
             <HeroElement>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-foreground md:whitespace-nowrap">
-                Discover the Best <span className="text-primary block sm:inline">Crypto Cards.</span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 text-foreground md:whitespace-nowrap leading-tight">
+                Discover the Best <br className="sm:hidden" /><span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400">Crypto Cards.</span>
               </h2>
             </HeroElement>
             <HeroElement>
-              <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto px-4">
+              <p className="text-muted-foreground text-lg sm:text-xl max-w-2xl mx-auto px-4 leading-relaxed">
                 Compare fees, cashback rewards, and supported networks across 20+ verified crypto cards.
               </p>
             </HeroElement>

@@ -19,7 +19,6 @@ With dozens of cards on the market, it can be difficult to compare cashback rate
 *   **Detailed Comparisons**: Side-by-side analysis of monthly fees, cashback rates (up to 4%+), and editor trust scores.
 *   **Community Submissions & Reviews**: Users can securely connect their Web3 wallets to upvote cards, leave reviews, and suggest edits to existing card data.
 *   **AI-Powered Research Sync**: An integrated stealth Admin Dashboard uses **xAI (Grok)** via Puter.js to automatically scrape the web and summarize the latest fee structures and updates for any card.
-*   **Cryptographically Secured Admin Panel**: The backend is mathematically sealed. Administrative actions (approving submissions, editing cards, triggering AI syncs) require a cryptographic signature from a designated Admin Wallet verified on the server via Privy.
 *   **Web3 Native**: Seamless wallet authentication using Privy, allowing users to interact with the platform without needing traditional passwords.
 
 ## 🛠 Tech Stack

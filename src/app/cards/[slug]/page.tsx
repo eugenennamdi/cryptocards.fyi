@@ -113,218 +113,175 @@ export default async function CardProfilePage(
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12 md:py-20">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
         {/* Profile Header */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start mb-12">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start mb-10">
           {card.logo_url ? (
-            <ImageWithFallback 
-              src={card.logo_url} 
-              alt={card.name} 
-              className="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover border-2 border-border shadow-sm bg-white"
-              fallbackIconSize={48} 
-            />
+            <div className="relative flex-shrink-0">
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-2xl rounded-full" />
+              <ImageWithFallback 
+                src={card.logo_url} 
+                alt={card.name} 
+                className="relative w-24 h-24 md:w-32 md:h-32 rounded-[28px] object-cover ring-1 ring-border/50 shadow-2xl shadow-black/5 bg-white"
+                fallbackIconSize={48} 
+              />
+            </div>
           ) : (
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-muted flex items-center justify-center border-2 border-border shadow-sm">
-              <CreditCard className="w-10 h-10 md:w-12 md:h-12 text-muted-foreground" />
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-[28px] flex-shrink-0 bg-muted flex items-center justify-center ring-1 ring-border/50 shadow-2xl shadow-black/5">
+              <CreditCard className="w-10 h-10 md:w-14 md:h-14 text-muted-foreground" />
             </div>
           )}
           
-          <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2">
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-0 md:mt-2">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-2">
               {card.name}
             </h1>
             {card.description && card.description !== "A popular crypto card offering seamless spending and robust features." && (
-              <p className="text-xl text-muted-foreground mb-6">
+              <p className="text-lg text-muted-foreground max-w-2xl line-clamp-2 mb-5 leading-snug">
                 {card.description}
               </p>
             )}
             
-            <div className="flex flex-wrap items-center gap-4 mt-4 mb-4">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-1">
               <a 
                 href={card.website_url} 
                 target="_blank" 
                 rel="noreferrer"
-                className="group inline-flex items-center gap-2 px-6 py-2.5 bg-foreground text-background font-bold text-sm rounded-full hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-foreground/10 transition-all"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-bold text-sm rounded-full hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-foreground/10"
               >
-                Visit Website <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                Visit Website <ExternalLink className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
               </a>
-              
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 text-green-700 dark:text-green-400 rounded-full border border-green-500/20 shadow-sm">
-                <ShieldCheck className="w-4 h-4 fill-green-500/20" />
-                <span className="font-bold text-xs tracking-wider uppercase">Trust Score: {scoreDisplay}</span>
-              </div>
-              
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/10 text-blue-700 dark:text-blue-400 rounded-full border border-blue-500/20 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-blue-500" />
-                <span className="font-bold text-xs tracking-wider uppercase">Last Verified: {lastVerifiedStr}</span>
-              </div>
-            </div>
-            
-            <AdminCardActions cardId={card.id} />
-          </div>
-        </div>
-
-        {/* Detailed Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Fees & Rates */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="text-lg font-bold border-b border-border pb-3 mb-4">Financials</h2>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground font-medium">Cashback Rate</span>
-                <span className="font-bold">{card.cashback_rate}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground font-medium">Monthly Fees</span>
-                <span className="font-bold">{card.monthly_fees}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Networks */}
-          <div className="bg-card border border-border rounded-xl p-6">
-            <h2 className="text-lg font-bold border-b border-border pb-3 mb-4">Supported Networks</h2>
-            <div className="flex gap-2 flex-wrap">
-              {card.supported_networks?.map((network) => (
-                <NetworkBadge key={network} network={network} />
-              ))}
+              <AdminCardActions cardId={card.id} />
             </div>
           </div>
         </div>
 
-        {/* Pros and Cons */}
-        {((card.pros && card.pros.length > 0) || (card.cons && card.cons.length > 0)) && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-green-700 dark:text-green-400 mb-4 flex items-center gap-2"><CheckCircle2 className="w-6 h-6"/> The Pros</h2>
-              <ul className="space-y-3">
-                {card.pros?.map((pro, i) => (
-                  <li key={i} className="flex gap-3 text-sm md:text-base text-foreground/90 leading-relaxed">
-                    <span className="text-green-600 dark:text-green-500 mt-1 flex-shrink-0">•</span> {pro}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-6">
-              <h2 className="text-xl font-bold text-red-700 dark:text-red-400 mb-4 flex items-center gap-2"><XCircle className="w-6 h-6"/> The Cons</h2>
-              <ul className="space-y-3">
-                {card.cons?.map((con, i) => (
-                  <li key={i} className="flex gap-3 text-sm md:text-base text-foreground/90 leading-relaxed">
-                    <span className="text-red-600 dark:text-red-500 mt-1 flex-shrink-0">•</span> {con}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
-
-        {/* Detailed Fees Table */}
-        {card.fee_details && Object.keys(card.fee_details).length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Detailed Fee Breakdown</h2>
-            <div className="overflow-x-auto overflow-y-hidden border border-border rounded-xl">
-              <table className="w-full min-w-[500px] text-left border-collapse">
-                <tbody className="divide-y divide-border">
-                  {Object.entries(card.fee_details)
-                    .filter(([feeName]) => feeName !== 'pending_edits')
-                    .map(([feeName, feeValue]) => (
-                    <tr key={feeName} className="hover:bg-muted/50 transition-colors">
-                      <th className="px-6 py-4 font-medium text-muted-foreground w-1/2">{feeName}</th>
-                      <td className="px-6 py-4 font-semibold text-foreground w-1/2">{String(feeValue)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-
-        {/* Editorial Review */}
-        {card.full_review && (
-          <div className="mb-12 bg-card border border-border rounded-xl p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <h2 className="text-2xl font-bold">Summary</h2>
-              <span className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                <Sparkles className="w-3 h-3" /> AI Generated
-              </span>
-            </div>
-            <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <p className="text-lg leading-relaxed text-foreground/90">
-                {card.full_review}
-              </p>
-            </div>
-            <div className="mt-6 pt-4 border-t border-border flex items-start gap-3 text-sm text-muted-foreground">
-              <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <p>
-                <strong>Transparency Note:</strong> This summary was objectively synthesized by <strong>Google Gemini 2.5 Flash</strong> using aggregated community sentiment and historical reputation data. It does not represent human editorial opinion or professional financial advice.
-              </p>
-            </div>
-          </div>
-        )}
-        <SuggestEditForm cardId={card.id} />
-
-        {/* Community Trust Section */}
-        <div className="bg-card border border-border rounded-xl p-6">
-          <h2 className="text-lg font-bold mb-2">Community Trust Data</h2>
-          <p className="text-muted-foreground text-sm mb-4">
-            This card has received <strong>{totalVotes}</strong> anonymous community votes, 
-            resulting in an independent community rating of <strong>{scoreDisplay}</strong>. 
-            This score is 100% community-driven.
-          </p>
-          <div className="flex items-center gap-4">
-            <div className="bg-muted px-4 py-2 rounded-md font-medium text-sm flex items-center gap-2">
-              <span className="text-green-600 dark:text-green-500 font-bold">▲</span> {card.upvotes} Upvotes
-            </div>
-            <div className="bg-muted px-4 py-2 rounded-md font-medium text-sm flex items-center gap-2">
-              <span className="text-red-600 dark:text-red-500 font-bold">▼</span> {card.downvotes} Downvotes
-            </div>
-          </div>
-        </div>
-
-        {/* User Reviews Section */}
-        <div className="mt-16 pt-12 border-t border-border">
-          <div className="flex flex-col md:flex-row gap-8 items-start justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-black mb-2">Community Reviews</h2>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center">
-                  <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-                  <span className="text-2xl font-bold ml-2">{averageRating}</span>
-                  <span className="text-muted-foreground ml-1">/ 5</span>
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          
+          {/* Main Info (Left/Middle 2 Columns) */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Financials */}
+              <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+                <h2 className="text-base font-bold border-b border-border pb-2 mb-3">Financials</h2>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground font-medium">Cashback Rate</span>
+                    <span className="font-bold">{card.cashback_rate}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground font-medium">Monthly Fees</span>
+                    <span className="font-bold">{card.monthly_fees}</span>
+                  </div>
                 </div>
-                <span className="text-muted-foreground">({reviews.length} reviews)</span>
               </div>
+
+              {/* Networks */}
+              <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+                <h2 className="text-base font-bold border-b border-border pb-2 mb-3">Supported Networks</h2>
+                <div className="flex gap-2 flex-wrap">
+                  {card.supported_networks?.map((network) => (
+                    <NetworkBadge key={network} network={network} />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Pros and Cons */}
+            {((card.pros && card.pros.length > 0) || (card.cons && card.cons.length > 0)) && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-5">
+                  <h2 className="text-base font-bold text-green-700 dark:text-green-400 mb-3 flex items-center gap-2"><CheckCircle2 className="w-5 h-5"/> Pros</h2>
+                  <ul className="space-y-2">
+                    {card.pros?.map((pro, i) => (
+                      <li key={i} className="flex gap-2 text-sm text-foreground/90 leading-snug">
+                        <span className="text-green-600 dark:text-green-500 flex-shrink-0">•</span> {pro}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-5">
+                  <h2 className="text-base font-bold text-red-700 dark:text-red-400 mb-3 flex items-center gap-2"><XCircle className="w-5 h-5"/> Cons</h2>
+                  <ul className="space-y-2">
+                    {card.cons?.map((con, i) => (
+                      <li key={i} className="flex gap-2 text-sm text-foreground/90 leading-snug">
+                        <span className="text-red-600 dark:text-red-500 flex-shrink-0">•</span> {con}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar (Right Column) */}
+          <div className="flex flex-col gap-6">
+            {/* Community Trust Section */}
+            <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+              <h2 className="text-base font-bold border-b border-border pb-2 mb-3">Community Trust</h2>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 text-green-700 dark:text-green-400 rounded-full border border-green-500/20">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span className="font-bold text-xs uppercase">Score: {scoreDisplay}</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-500/10 text-blue-700 dark:text-blue-400 rounded-full border border-blue-500/20">
+                  <span className="font-bold text-xs uppercase">Verified: {lastVerifiedStr}</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-xs">
+                <div className="bg-muted px-3 py-1.5 rounded-md font-medium flex items-center gap-1.5 w-1/2 justify-center">
+                  <span className="text-green-600 dark:text-green-500 font-bold">▲</span> {card.upvotes}
+                </div>
+                <div className="bg-muted px-3 py-1.5 rounded-md font-medium flex items-center gap-1.5 w-1/2 justify-center">
+                  <span className="text-red-600 dark:text-red-500 font-bold">▼</span> {card.downvotes}
+                </div>
+              </div>
+            </div>
+
+            {/* Suggest Edit Form */}
+            <SuggestEditForm cardId={card.id} />
+          </div>
+        </div>
+
+        {/* User Reviews Section - Compact */}
+        <div className="mb-10">
+          <div className="flex items-center justify-between mb-4 border-b border-border pb-3">
+            <h2 className="text-2xl font-black">Community Reviews</h2>
+            <div className="flex items-center gap-2 text-sm font-medium">
+              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+              <span>{averageRating}</span>
+              <span className="text-muted-foreground">({reviews.length})</span>
             </div>
           </div>
 
-          <div className="mb-12">
+          <div className="mb-6">
             <ReviewForm cardId={card.id} cardSlug={card.slug} />
           </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {reviews.length === 0 ? (
-              <div className="bg-card border border-border rounded-xl p-8 text-center">
-                <p className="text-muted-foreground mb-2">No reviews yet.</p>
-                <p className="text-sm font-medium">Be the first to share your experience with the {card.name}!</p>
+              <div className="col-span-full bg-card border border-border rounded-xl p-6 text-center">
+                <p className="text-muted-foreground text-sm">No reviews yet. Be the first!</p>
               </div>
             ) : (
               reviews.map((review) => (
-                <div key={review.id} className="bg-card border border-border rounded-xl p-6">
-                  <div className="flex justify-between items-start mb-3">
+                <div key={review.id} className="bg-card border border-border rounded-xl p-4 text-sm">
+                  <div className="flex justify-between items-start mb-2">
                     <div>
-                      <div className="font-bold text-foreground">{review.author_name}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {new Date(review.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                      <div className="font-bold">{review.author_name}</div>
+                      <div className="text-[10px] text-muted-foreground">
+                        {new Date(review.created_at).toLocaleDateString()}
                       </div>
                     </div>
                     <div className="flex gap-0.5">
                       {[1, 2, 3, 4, 5].map(star => (
-                        <Star key={star} className={`w-4 h-4 ${star <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
+                        <Star key={star} className={`w-3 h-3 ${star <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground'}`} />
                       ))}
                     </div>
                   </div>
                   {review.review_text && (
-                    <p className="text-foreground/90 text-sm leading-relaxed whitespace-pre-wrap">
+                    <p className="text-foreground/90 leading-relaxed whitespace-pre-wrap">
                       {review.review_text}
                     </p>
                   )}

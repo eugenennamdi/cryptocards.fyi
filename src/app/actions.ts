@@ -42,7 +42,7 @@ export async function handleReviewSubmission(formData: FormData) {
 }
 
 import { updateSubmissionStatus, deleteCard } from '@/lib/data';
-import { ADMIN_WALLET } from '@/lib/admin';
+import { isAuthorizedAdmin } from '@/lib/admin';
 import { PrivyClient } from '@privy-io/server-auth';
 
 const privy = new PrivyClient(
@@ -55,7 +55,7 @@ export async function verifyAdminAccess(token: string | null) {
   try {
     const verifiedClaims = await privy.verifyAuthToken(token);
     const user = await privy.getUser(verifiedClaims.userId);
-    if (!user.wallet?.address || user.wallet.address.toLowerCase() !== ADMIN_WALLET.toLowerCase()) {
+    if (!isAuthorizedAdmin(user.wallet?.address)) {
       throw new Error("Unauthorized: Wallet address does not match Admin");
     }
     return true;

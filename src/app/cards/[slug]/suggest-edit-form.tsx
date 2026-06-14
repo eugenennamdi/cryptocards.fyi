@@ -14,8 +14,8 @@ export default function SuggestEditForm({ cardId }: { cardId: string }) {
 
   if (!isOpen && !success) {
     return (
-      <div className="mt-12 bg-muted/30 border border-border rounded-xl p-6 text-center">
-        <h3 className="text-lg font-bold mb-2">Spot inaccurate data?</h3>
+      <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+        <h3 className="text-base font-bold mb-1">Spot inaccurate data?</h3>
         <p className="text-sm text-muted-foreground mb-4">
           Card fees and rates can change. Help keep the community accurate.
         </p>
@@ -38,19 +38,26 @@ export default function SuggestEditForm({ cardId }: { cardId: string }) {
 
   if (success) {
     return (
-      <div className="mt-12 bg-green-500/10 border border-green-500/20 text-green-600 rounded-xl p-6 text-center flex flex-col items-center">
-        <CheckCircle2 className="w-8 h-8 mb-3 text-green-500" />
-        <h3 className="text-lg font-bold">Thank you!</h3>
-        <p className="text-sm opacity-80">
-          Your suggestion has been submitted to the editors for review.
-        </p>
+      <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-5 text-center shadow-sm">
+        <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
+        <h3 className="font-bold text-green-700 dark:text-green-400 mb-1">Edit Submitted</h3>
+        <p className="text-xs text-green-600 dark:text-green-500 mb-4">Our team will review your suggestion shortly. Thank you!</p>
+        <button 
+          onClick={() => {
+            setSuccess(false);
+            setIsOpen(false);
+          }}
+          className="text-xs font-bold text-green-700 dark:text-green-400 underline underline-offset-4"
+        >
+          Close
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="mt-12 bg-card border border-border rounded-xl p-6 shadow-sm">
-      <h3 className="text-lg font-bold mb-4">Suggest an Edit</h3>
+    <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+      <h3 className="text-base font-bold mb-4">Suggest an Edit</h3>
       <form
         action={async (fd) => {
           setIsSubmitting(true);

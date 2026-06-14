@@ -297,7 +297,7 @@ export function CardGrid({ initialCards }: CardGridProps) {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
               }}
-              className={`group relative flex flex-col bg-card border rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${selectedCards.includes(card.slug) ? 'border-primary ring-2 ring-primary/20' : 'border-border hover:border-primary/40'}`}
+              className={`group relative flex flex-col bg-card border rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgb(255,255,255,0.05)] hover:-translate-y-1 transition-all duration-300 ${selectedCards.includes(card.slug) ? 'border-primary ring-2 ring-primary/20' : 'border-border hover:border-primary/40'}`}
             >
               <div className="p-6 flex items-start justify-between border-b border-border bg-muted/30">
                 <div className="flex items-center gap-4">
