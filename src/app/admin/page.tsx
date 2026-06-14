@@ -125,7 +125,7 @@ export default function AdminPage() {
                         setProcessingId(sub.id);
                         const token = await getAccessToken();
                         fd.append('privy_token', token || '');
-                        fd.append('caller_wallet', user.wallet!.address);
+                        fd.append('caller_wallet', user!.wallet!.address);
                         fd.append('submission_id', sub.id);
                         await handleApproveSubmission(fd);
                         setSubmissions(s => s.filter(x => x.id !== sub.id));
@@ -139,7 +139,7 @@ export default function AdminPage() {
                         setProcessingId(sub.id);
                         const token = await getAccessToken();
                         fd.append('privy_token', token || '');
-                        fd.append('caller_wallet', user.wallet!.address);
+                        fd.append('caller_wallet', user!.wallet!.address);
                         fd.append('submission_id', sub.id);
                         await handleRejectSubmission(fd);
                         setSubmissions(s => s.filter(x => x.id !== sub.id));
@@ -182,7 +182,7 @@ export default function AdminPage() {
                   setProcessingId(editingCard ? editingCard.id : 'add-new');
                   const token = await getAccessToken();
                   fd.append('privy_token', token || '');
-                  fd.append('caller_wallet', user.wallet!.address);
+                  fd.append('caller_wallet', user!.wallet!.address);
                   if (editingCard) fd.append('card_id', editingCard.id);
                   
                   const res = editingCard ? await handleUpdateCard(fd) : await handleAddCard(fd);
@@ -288,7 +288,7 @@ CRITICAL RULES:
                             const fd = new FormData();
                             const token = await getAccessToken();
                             fd.append('privy_token', token || '');
-                            fd.append('caller_wallet', user.wallet!.address);
+                            fd.append('caller_wallet', user!.wallet!.address);
                             fd.append('card_id', card.id);
                             fd.append('ai_text', textContent);
                             const saveRes = await handleSavePuterSync(fd);
@@ -319,7 +319,7 @@ CRITICAL RULES:
                         setProcessingId(card.id);
                         const token = await getAccessToken();
                         fd.append('privy_token', token || '');
-                        fd.append('caller_wallet', user.wallet!.address);
+                        fd.append('caller_wallet', user!.wallet!.address);
                         fd.append('card_id', card.id);
                         await handleDeleteCard(fd);
                         setCards(c => c.filter(x => x.id !== card.id));

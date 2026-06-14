@@ -29,7 +29,7 @@ export function AdminCardActions({ cardId }: { cardId: string }) {
       <form action={async (fd) => {
         if (!confirm('Are you sure you want to permanently delete this card?')) return;
         setIsDeleting(true);
-        fd.append('caller_wallet', user.wallet!.address);
+        fd.append('caller_wallet', user!.wallet!.address);
         fd.append('card_id', cardId);
         await handleDeleteCard(fd);
         router.push('/');
