@@ -20,6 +20,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
           accentColor: '#171717',
           logo: 'https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/credit-card.svg',
         },
+        embeddedWallets: {
+          createOnLogin: 'users-without-wallets',
+        },
       }}
     >
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
