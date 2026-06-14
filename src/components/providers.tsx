@@ -21,7 +21,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
           logo: 'https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/credit-card.svg',
         },
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
+          ethereum: {
+            createOnLogin: 'users-without-wallets',
+          },
         },
       }}
     >
