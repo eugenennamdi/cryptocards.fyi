@@ -225,10 +225,12 @@ export default async function CardProfilePage(
             <div className="overflow-x-auto overflow-y-hidden border border-border rounded-xl">
               <table className="w-full min-w-[500px] text-left border-collapse">
                 <tbody className="divide-y divide-border">
-                  {Object.entries(card.fee_details).map(([feeName, feeValue]) => (
+                  {Object.entries(card.fee_details)
+                    .filter(([feeName]) => feeName !== 'pending_edits')
+                    .map(([feeName, feeValue]) => (
                     <tr key={feeName} className="hover:bg-muted/50 transition-colors">
                       <th className="px-6 py-4 font-medium text-muted-foreground w-1/2">{feeName}</th>
-                      <td className="px-6 py-4 font-semibold text-foreground w-1/2">{feeValue}</td>
+                      <td className="px-6 py-4 font-semibold text-foreground w-1/2">{String(feeValue)}</td>
                     </tr>
                   ))}
                 </tbody>
