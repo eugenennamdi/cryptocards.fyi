@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from '@/components/providers';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'CryptoCards.fyi | The Best Crypto Cards Directory',
@@ -38,9 +39,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${GeistSans.className} font-sans antialiased`}>
+      <body className={`${GeistSans.className} font-sans antialiased flex flex-col min-h-screen`}>
         <Providers>
-          {children}
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
         </Providers>
         <Analytics />
       </body>

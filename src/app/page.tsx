@@ -1,6 +1,6 @@
 import { getAllCards } from '@/lib/data';
 import Link from 'next/link';
-import { ShieldCheck, PlusCircle } from 'lucide-react';
+import { ShieldCheck, PlusCircle, Github, Twitter } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CardGrid } from '@/components/card-grid';
 import { ConnectButton } from '@/components/connect-button';
@@ -26,6 +26,14 @@ export default async function HomePage() {
               <PlusCircle className="w-4 h-4" /> Submit Card
             </Link>
             <ConnectButton />
+            <div className="hidden sm:flex items-center gap-1 border-r border-border pr-4 mr-2">
+              <a href="https://x.com/cryptocardsfyi" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="https://github.com/eugenennamdi/cryptocards.fyi" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
             <ThemeToggle />
           </div>
         </div>

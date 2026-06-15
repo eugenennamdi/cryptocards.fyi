@@ -2,7 +2,7 @@ import { getCardBySlug, getAllCards, getReviewsForCard, getSimilarCards } from '
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, ShieldCheck, CreditCard, CheckCircle2, XCircle, Sparkles, Globe } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ShieldCheck, CreditCard, CheckCircle2, XCircle, Sparkles, Globe, Github, Twitter } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { NetworkBadge } from '@/components/network-badge';
 import { ConnectButton } from '@/components/connect-button';
@@ -108,6 +108,14 @@ export default async function CardProfilePage(
           </Link>
           <div className="flex items-center gap-4">
             <ConnectButton />
+            <div className="hidden sm:flex items-center gap-1 border-r border-border pr-4 mr-2">
+              <a href="https://x.com/cryptocardsfyi" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="https://github.com/eugenennamdi/cryptocards.fyi" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
             <ThemeToggle />
           </div>
         </div>
