@@ -21,21 +21,19 @@ export function Footer() {
               href="https://x.com/cryptocardsfyi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/50 hover:bg-[#1DA1F2]/10 text-muted-foreground hover:text-[#1DA1F2] transition-colors text-sm font-medium"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 hover:bg-[#1DA1F2]/10 text-muted-foreground hover:text-[#1DA1F2] transition-colors"
               aria-label="Follow us on X (Twitter)"
             >
-              <XIcon className="w-4 h-4" />
-              <span>Twitter</span>
+              <XIcon className="w-5 h-5" />
             </a>
             <a 
               href="https://github.com/eugenennamdi/cryptocards.fyi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/50 hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="View source on GitHub"
             >
-              <GithubIcon className="w-4 h-4" />
-              <span>GitHub</span>
+              <GithubIcon className="w-5 h-5" />
             </a>
           </div>
           <p className="text-xs text-muted-foreground/60">
