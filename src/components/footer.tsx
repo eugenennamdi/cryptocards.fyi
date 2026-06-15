@@ -1,4 +1,4 @@
-import { Github, Twitter } from 'lucide-react';
+import { GithubIcon, XIcon } from '@/components/icons';
 import Link from 'next/link';
 
 export function Footer() {
@@ -24,7 +24,7 @@ export function Footer() {
               className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/50 hover:bg-[#1DA1F2]/10 text-muted-foreground hover:text-[#1DA1F2] transition-colors text-sm font-medium"
               aria-label="Follow us on X (Twitter)"
             >
-              <Twitter className="w-4 h-4" />
+              <XIcon className="w-4 h-4" />
               <span>Twitter</span>
             </a>
             <a 
@@ -34,7 +34,7 @@ export function Footer() {
               className="flex items-center gap-2 px-3 py-2 rounded-full bg-muted/50 hover:bg-foreground/10 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
               aria-label="View source on GitHub"
             >
-              <Github className="w-4 h-4" />
+              <GithubIcon className="w-4 h-4" />
               <span>GitHub</span>
             </a>
           </div>
