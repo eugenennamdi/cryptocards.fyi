@@ -1,6 +1,7 @@
 import { getCardBySlug, getAllCards, getReviewsForCard, getSimilarCards } from '@/lib/data';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { ModalWrapper } from '@/components/modal-wrapper';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, ShieldCheck, CreditCard, CheckCircle2, XCircle, Sparkles, Globe } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -9,45 +10,12 @@ import { ConnectButton } from '@/components/connect-button';
 import { ImageWithFallback } from '@/components/image-with-fallback';
 import { AdminCardActions } from '@/components/admin-card-actions';
 import { SimilarCards } from '@/components/similar-cards';
-import { ReviewForm } from './review-form';
-import SuggestEditForm from './suggest-edit-form';
+import { ReviewForm } from '@/app/cards/[slug]/review-form';
+import SuggestEditForm from '@/app/cards/[slug]/suggest-edit-form';
 import { PlusCircle, Info, Star } from 'lucide-react';
 import Script from 'next/script';
 
-export async function generateStaticParams() {
-  const cards = await getAllCards();
-  return cards.map((card) => ({
-    slug: card.slug,
-  }));
-}
-
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const params = await props.params;
-  const card = await getCardBySlug(params.slug);
-
-  if (!card) {
-    return { title: 'Card Not Found | CryptoCards.fyi' };
-  }
-
-  return {
-    title: `${card.name} Review & Fees | CryptoCards.fyi`,
-    description: card.description,
-    openGraph: {
-      title: `${card.name} - Honest Reviews & Details`,
-      description: card.description,
-      type: 'website',
-      images: [card.logo_url || 'https://cryptocards.fyi/og.png'],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${card.name} | CryptoCards.fyi`,
-      description: card.description,
-      images: [card.logo_url || 'https://cryptocards.fyi/og.png'],
-    },
-  };
-}
-
-export default async function CardProfilePage(
+export default async function CardModalPage(
   props: { params: Promise<{ slug: string }> }
 ) {
   const params = await props.params;
@@ -93,27 +61,14 @@ export default async function CardProfilePage(
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <ModalWrapper>
+    <div className="bg-background text-foreground p-4 md:p-8 rounded-2xl">
       <Script
         id="json-ld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Header section */}
-      <header className="border-b border-border bg-background sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-semibold text-sm">Back to Directory</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <ConnectButton />
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
+      <div className="max-w-6xl mx-auto">
         {/* Profile Header */}
         <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center mb-8">
           {card.logo_url ? (
@@ -293,9 +248,8 @@ export default async function CardProfilePage(
           </div>
         </div>
 
-        {/* Similar Cards Recommendation Engine */}
-        <SimilarCards cards={similarCards} />
-      </main>
+      </div>
     </div>
+    </ModalWrapper>
   );
 }

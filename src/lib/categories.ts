@@ -1,7 +1,27 @@
 export type CardMetadata = {
   region: string;
   kyc: string;
+  paymentNetwork: 'Visa' | 'Mastercard' | 'Unknown';
+  applePay: boolean;
+  custody: 'Self-Custodial' | 'Custodial';
 };
+
+export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
+  "Visa": [
+    "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card"
+  ],
+  "Mastercard": [
+    "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto"
+  ]
+};
+
+export const CARD_APPLE_PAY = [
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto"
+];
+
+export const CARD_SELF_CUSTODIAL = [
+  "Gnosis Pay", "ether.fi Cash", "MetaMask Card", "Holyheld", "Bleap", "COCA", "ThorWallet", "Avici Money", "Tria", "Foton VCC", "SolCard", "Zypto", "PintoPay", "Payy"
+];
 
 export const CARD_REGIONS: Record<string, string[]> = {
   "Global": [
@@ -52,7 +72,14 @@ export function getMetadataForCard(name: string): CardMetadata {
     if (cards.includes(name)) kyc = k;
   }
 
-  return { region, kyc };
+  let paymentNetwork: 'Visa' | 'Mastercard' | 'Unknown' = 'Unknown';
+  if (CARD_PAYMENT_NETWORKS['Visa'].includes(name)) paymentNetwork = 'Visa';
+  else if (CARD_PAYMENT_NETWORKS['Mastercard'].includes(name)) paymentNetwork = 'Mastercard';
+
+  const applePay = CARD_APPLE_PAY.includes(name);
+  const custody: 'Self-Custodial' | 'Custodial' = CARD_SELF_CUSTODIAL.includes(name) ? 'Self-Custodial' : 'Custodial';
+
+  return { region, kyc, paymentNetwork, applePay, custody };
 }
 
 export const CARD_POPULARITY: Record<string, number> = {

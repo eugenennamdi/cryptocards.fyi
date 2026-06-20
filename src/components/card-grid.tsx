@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, CreditCard, Filter, ArrowUpDown, Info } from 'lucide-react';
 import { ImageWithFallback } from '@/components/image-with-fallback';
-import { Search, CheckSquare, Square } from 'lucide-react';
+import { Search, CheckSquare, Square, Smartphone, Wallet, Wifi, ShieldCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { NetworkBadge, networkIconMap } from './network-badge';
 import { VoteButton } from './vote-button';
@@ -46,8 +46,8 @@ export function CardGrid({ initialCards }: CardGridProps) {
 
   useEffect(() => {
     if (quickFilter === 'no-kyc' && kycFilter !== 'Low/No KYC') setQuickFilter('custom');
-    if (quickFilter === 'africa' && regionFilter !== 'Emerging Markets') setQuickFilter('custom');
-    if (quickFilter === 'europe' && regionFilter !== 'Europe & UK') setQuickFilter('custom');
+    if (quickFilter === 'apple-pay' && regionFilter !== 'all') setQuickFilter('custom');
+    if (quickFilter === 'self-custody' && regionFilter !== 'all') setQuickFilter('custom');
     if (quickFilter === 'all' && (kycFilter !== 'all' || regionFilter !== 'all' || networkFilter !== 'all')) setQuickFilter('custom');
   }, [kycFilter, regionFilter, networkFilter, quickFilter]);
 
@@ -63,19 +63,9 @@ export function CardGrid({ initialCards }: CardGridProps) {
       setRegionFilter('all');
       setNetworkFilter('all');
       setSearchQuery('');
-    } else if (type === 'high-cashback') {
+    } else if (type === 'high-cashback' || type === 'apple-pay' || type === 'self-custody') {
       setKycFilter('all');
       setRegionFilter('all');
-      setNetworkFilter('all');
-      setSearchQuery('');
-    } else if (type === 'africa') {
-      setKycFilter('all');
-      setRegionFilter('Emerging Markets');
-      setNetworkFilter('all');
-      setSearchQuery('');
-    } else if (type === 'europe') {
-      setKycFilter('all');
-      setRegionFilter('Europe & UK');
       setNetworkFilter('all');
       setSearchQuery('');
     }
@@ -136,6 +126,16 @@ export function CardGrid({ initialCards }: CardGridProps) {
       });
     }
 
+    // Quick Filter: Apple Pay
+    if (quickFilter === 'apple-pay') {
+      filtered = filtered.filter(card => getMetadataForCard(card.name).applePay);
+    }
+
+    // Quick Filter: Self-Custody
+    if (quickFilter === 'self-custody') {
+      filtered = filtered.filter(card => getMetadataForCard(card.name).custody === 'Self-Custodial');
+    }
+
     // Sort
     filtered.sort((a, b) => {
       const scoreA = getCompositeScore(a);
@@ -181,10 +181,10 @@ export function CardGrid({ initialCards }: CardGridProps) {
       <div className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-2 mb-6 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
         {[
           { id: 'all', label: 'All Cards' },
+          { id: 'apple-pay', label: 'Apple/Google Pay' },
+          { id: 'self-custody', label: 'Self-Custodial' },
           { id: 'no-kyc', label: 'No/Low KYC' },
           { id: 'high-cashback', label: 'High Cashback (4%+)' },
-          { id: 'africa', label: 'Available in Africa' },
-          { id: 'europe', label: 'Available in Europe' },
         ].map(filter => (
           <button
             key={filter.id}
@@ -289,7 +289,10 @@ export function CardGrid({ initialCards }: CardGridProps) {
       >
         {processedCards.map((card) => {
           const compositeScore = getCompositeScore(card).toFixed(1);
-
+          const metadata = getMetadataForCard(card.name);
+          const isVisa = metadata.paymentNetwork === 'Visa';
+          const isMastercard = metadata.paymentNetwork === 'Mastercard';
+          
           return (
             <motion.div 
               key={card.id} 
@@ -297,89 +300,113 @@ export function CardGrid({ initialCards }: CardGridProps) {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
               }}
-              className={`group relative flex flex-col bg-card border rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgb(255,255,255,0.05)] hover:-translate-y-1 transition-all duration-300 ${selectedCards.includes(card.slug) ? 'border-primary ring-2 ring-primary/20' : 'border-border hover:border-primary/40'}`}
+              whileHover={{ scale: 1.02, rotateX: 4, rotateY: -4 }}
+              style={{ perspective: 1000, transformStyle: "preserve-3d" }}
+              className={`group relative flex flex-col bg-card border rounded-[20px] overflow-hidden hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_20px_40px_rgb(255,255,255,0.08)] transition-all duration-500 ${selectedCards.includes(card.slug) ? 'border-primary ring-2 ring-primary/20' : 'border-border hover:border-primary/40'}`}
             >
-              <div className="p-6 flex items-start justify-between border-b border-border bg-muted/30">
-                <div className="flex items-center gap-4">
-                  {card.logo_url ? (
-                    <ImageWithFallback 
-                      src={card.logo_url} 
-                      alt={card.name} 
-                      className="w-12 h-12 rounded-full object-cover border border-border bg-white"
-                      fallbackIconSize={24} 
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center border border-border">
-                      <CreditCard className="w-5 h-5 text-muted-foreground" />
+              {/* Physical Card Visual */}
+              <div className="p-4 sm:p-5" style={{ transform: "translateZ(30px)" }}>
+                <div className={`relative w-full aspect-[1.586/1] rounded-xl overflow-hidden flex flex-col justify-between p-5 relative group-hover:after:absolute group-hover:after:inset-0 group-hover:after:bg-gradient-to-tr group-hover:after:from-transparent group-hover:after:via-white/40 group-hover:after:to-transparent group-hover:after:translate-x-full group-hover:after:transition-transform group-hover:after:duration-1000 overflow-hidden bg-gradient-to-br from-slate-100 via-blue-50/40 to-slate-200 shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_10px_30px_rgba(0,0,0,0.15)] border border-slate-200/80 ring-1 ring-blue-900/5 dark:from-zinc-800 dark:via-slate-800 dark:to-zinc-900 dark:border-zinc-700/50 dark:ring-blue-400/10 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0_10px_30px_rgba(0,0,0,0.5)]`}>
+                  {/* Glass highlight */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/40 to-transparent dark:from-white/5 pointer-events-none" />
+                  
+                  {/* Top: Logo and Network */}
+                  <div className="flex justify-between items-start z-10 relative">
+                    <div className="flex items-center gap-3 bg-white/40 dark:bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-black/5 dark:border-white/5 shadow-sm">
+                      {card.logo_url ? (
+                        <ImageWithFallback src={card.logo_url} alt={card.name} className="w-5 h-5 rounded-full object-cover bg-white shadow-sm" fallbackIconSize={16} />
+                      ) : (
+                        <CreditCard className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
+                      )}
+                      <span className="text-zinc-800 dark:text-white font-bold text-sm truncate max-w-[120px]">{card.name}</span>
                     </div>
-                  )}
-                  <div>
-                    <Link href={`/cards/${card.slug}`} className="font-bold text-foreground hover:underline text-lg">
-                      {card.name}
-                    </Link>
-                    <div className="flex items-center gap-1.5 mt-1 text-sm font-medium text-muted-foreground">
-                      <span>Trust Score:</span>
-                      <span className="text-foreground font-bold">
-                        {(card.upvotes + card.downvotes) > 0 ? `${getCompositeScore(card).toFixed(1)}/10` : 'N/A'}
-                      </span>
+                    <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
+                      <Wifi className="w-5 h-5 rotate-90" />
+                    </div>
+                  </div>
+
+                  {/* Middle: EMV Chip */}
+                  <div className="z-10 relative mt-4">
+                    <div className="w-10 h-8 rounded bg-gradient-to-br from-[#F3E2B3] to-[#D4AF37] border border-yellow-600/30 flex flex-col justify-between p-[2px] opacity-90 shadow-sm">
+                       <div className="flex justify-between w-full h-[30%]">
+                         <div className="w-[30%] h-full border border-black/10 rounded-[1px]"></div>
+                         <div className="w-[30%] h-full border border-black/10 rounded-[1px]"></div>
+                       </div>
+                       <div className="w-full h-[30%] border border-black/10 rounded-[1px]"></div>
+                       <div className="flex justify-between w-full h-[30%]">
+                         <div className="w-[30%] h-full border border-black/10 rounded-[1px]"></div>
+                         <div className="w-[30%] h-full border border-black/10 rounded-[1px]"></div>
+                       </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom: Visa/Mastercard */}
+                  <div className="flex justify-end items-end z-10 relative">
+                    <div className="h-8 flex items-center justify-end">
+                      {isVisa && (
+                        <span className="text-[#1A1F71] dark:text-white font-black text-2xl tracking-tighter italic pr-1">VISA</span>
+                      )}
+                      {isMastercard && (
+                        <div className="flex relative w-10 h-6 items-center pr-1">
+                          <div className="absolute w-6 h-6 rounded-full bg-[#EB001B]/90 mix-blend-multiply dark:mix-blend-screen left-0"></div>
+                          <div className="absolute w-6 h-6 rounded-full bg-[#F79E1B]/90 mix-blend-multiply dark:mix-blend-screen right-0"></div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
-                
-                <VoteButton 
-                  cardId={card.id} 
-                  cardName={card.name}
-                  initialUpvotes={card.upvotes} 
-                  initialDownvotes={card.downvotes} 
-                />
               </div>
 
-              <div className="p-6 flex-1 flex flex-col gap-4">
-                <div className="flex items-center gap-2">
-                  {(card.fee_details?.region || getMetadataForCard(card.name).region) === "Emerging Markets" ? (
-                    <span className={`relative group/tooltip inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-bold uppercase tracking-wider cursor-help ${getRegionColorClasses(card.fee_details?.region || getMetadataForCard(card.name).region)}`}>
-                      {card.fee_details?.region || getMetadataForCard(card.name).region}
-                      <Info className="w-3.5 h-3.5 opacity-70 group-hover/tooltip:opacity-100 transition-opacity" />
-                      
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-3 py-1.5 bg-foreground text-background text-[10px] rounded-md opacity-0 group-hover/tooltip:opacity-100 transition-all duration-200 pointer-events-none shadow-lg z-10 font-bold tracking-wider translate-y-1 group-hover/tooltip:translate-y-0">
-                        LATAM & Africa
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-foreground"></div>
-                      </div>
+              {/* Data Details Section */}
+              <div className="px-5 pb-5 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-muted-foreground flex items-center gap-1.5">
+                       <ShieldCheck className="w-4 h-4" /> Trust: <span className="text-foreground">{(card.upvotes + card.downvotes) > 0 ? compositeScore : 'N/A'}</span>
                     </span>
-                  ) : (
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-bold uppercase tracking-wider ${getRegionColorClasses(card.fee_details?.region || getMetadataForCard(card.name).region)}`}>
-                      {card.fee_details?.region || getMetadataForCard(card.name).region}
+                  </div>
+                  <VoteButton 
+                    cardId={card.id} 
+                    cardName={card.name}
+                    initialUpvotes={card.upvotes} 
+                    initialDownvotes={card.downvotes} 
+                  />
+                </div>
+
+                {/* Premium Badges */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {metadata.applePay && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
+                      <Smartphone className="w-3.5 h-3.5" /> Apple Pay
                     </span>
                   )}
-                  <span className={`inline-flex items-center px-2.5 py-1 rounded-md border text-xs font-bold uppercase tracking-wider ${getKycColorClasses(card.fee_details?.kyc || getMetadataForCard(card.name).kyc)}`}>
-                    {card.fee_details?.kyc || getMetadataForCard(card.name).kyc}
+                  {metadata.custody === 'Self-Custodial' && (
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
+                      <Wallet className="w-3.5 h-3.5" /> Self-Custody
+                    </span>
+                  )}
+                  <span className={`inline-flex items-center px-2 py-1 rounded border text-xs font-bold ${getKycColorClasses(metadata.kyc)}`}>
+                    {metadata.kyc}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Cashback</p>
-                    <p className="font-medium text-foreground">{card.cashback_rate}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Monthly Fee</p>
-                    <p className="font-medium text-foreground">{card.monthly_fees}</p>
-                  </div>
-                </div>
 
-                <div>
-                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Networks</p>
-                  <div className="flex gap-2 flex-wrap">
-                    {card.supported_networks?.map((network) => (
-                      <NetworkBadge key={network} network={network} />
-                    ))}
+                <div className="grid grid-cols-2 gap-4 bg-muted/30 p-3 rounded-lg border border-border mt-auto">
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">Cashback</p>
+                    <p className="font-bold text-foreground text-sm">{card.cashback_rate}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">Monthly Fee</p>
+                    <p className="font-bold text-foreground text-sm">{card.monthly_fees}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 border-t border-border bg-muted/10 flex gap-3">
+              {/* Action Bar */}
+              <div className="p-4 border-t border-border bg-muted/10 flex gap-3 mt-auto">
                 <button 
                   onClick={() => handleCompareToggle(card.slug)}
-                  className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border font-bold text-sm transition-colors ${
+                  className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border font-bold text-sm transition-colors ${
                     selectedCards.includes(card.slug) 
                       ? 'bg-primary/10 border-primary/20 text-primary hover:bg-primary/20' 
                       : 'bg-background border-border text-foreground hover:border-foreground/30 hover:bg-muted'
@@ -393,9 +420,9 @@ export function CardGrid({ initialCards }: CardGridProps) {
                 </button>
                 <Link 
                   href={`/cards/${card.slug}`}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-full bg-foreground text-background text-sm font-bold hover:opacity-90 transition-opacity"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl bg-foreground text-background text-sm font-bold hover:opacity-90 transition-opacity"
                 >
-                  Card Details <ArrowRight className="w-4 h-4" />
+                  Details <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </motion.div>

@@ -14,7 +14,7 @@ export default function SuggestEditForm({ cardId }: { cardId: string }) {
 
   if (!isOpen && !success) {
     return (
-      <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm">
+      <div className="bg-card border border-border rounded-xl p-5 text-center shadow-sm flex flex-col h-full justify-center items-center">
         <h3 className="text-base font-bold mb-1">Spot inaccurate data?</h3>
         <p className="text-sm text-muted-foreground mb-4">
           Card fees and rates can change. Help keep the community accurate.
@@ -38,7 +38,7 @@ export default function SuggestEditForm({ cardId }: { cardId: string }) {
 
   if (success) {
     return (
-      <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-5 text-center shadow-sm">
+      <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-5 text-center shadow-sm flex flex-col h-full justify-center items-center">
         <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
         <h3 className="font-bold text-green-700 dark:text-green-400 mb-1">Edit Submitted</h3>
         <p className="text-xs text-green-600 dark:text-green-500 mb-4">Our team will review your suggestion shortly. Thank you!</p>
@@ -56,7 +56,7 @@ export default function SuggestEditForm({ cardId }: { cardId: string }) {
   }
 
   return (
-    <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
+    <div className="bg-card border border-border rounded-xl p-5 shadow-sm flex flex-col h-full">
       <h3 className="text-base font-bold mb-4">Suggest an Edit</h3>
       <form
         action={async (fd) => {
