@@ -381,7 +381,7 @@ export function CardGrid({ initialCards }: CardGridProps) {
                 </div>
 
                 {/* Premium Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
                   {(metadata.applePay || metadata.googlePay) && (
                     <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
                       <Smartphone className="w-3.5 h-3.5" /> 
@@ -398,16 +398,6 @@ export function CardGrid({ initialCards }: CardGridProps) {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 bg-muted/30 p-3 rounded-lg border border-border mt-auto">
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">Cashback</p>
-                    <p className="font-bold text-foreground text-sm">{card.cashback_rate}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-0.5">Monthly Fee</p>
-                    <p className="font-bold text-foreground text-sm">{card.monthly_fees}</p>
-                  </div>
-                </div>
               </div>
 
               {/* Action Bar */}
