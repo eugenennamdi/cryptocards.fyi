@@ -9,19 +9,19 @@ export type CardMetadata = {
 
 export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
   "Visa": [
-    "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card", "RedotPay", "Payy"
+    "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card", "RedotPay", "Payy", "Uphold Card"
   ],
   "Mastercard": [
-    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto", "Bipa"
+    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto", "Bipa"
   ]
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
