@@ -8,10 +8,10 @@ export type CardMetadata = {
 
 export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
   "Visa": [
-    "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card"
+    "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card", "RedotPay"
   ],
   "Mastercard": [
-    "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto"
+    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto"
   ]
 };
 

@@ -122,14 +122,14 @@ export default async function CardModalPage(
           {/* Financials */}
           <div className="bg-card border border-border rounded-xl p-5 shadow-sm flex flex-col h-full">
             <h2 className="text-base font-bold border-b border-border pb-2 mb-3">Financials</h2>
-            <div className="space-y-3 text-sm flex-grow">
-              <div className="flex justify-between items-center">
+            <div className="space-y-4 text-sm flex-grow">
+              <div className="flex flex-col gap-1">
                 <span className="text-muted-foreground font-medium">Cashback Rate</span>
-                <span className="font-bold">{card.cashback_rate}</span>
+                <span className="font-bold leading-tight">{card.cashback_rate}</span>
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1">
                 <span className="text-muted-foreground font-medium">Monthly Fees</span>
-                <span className="font-bold">{card.monthly_fees}</span>
+                <span className="font-bold leading-tight">{card.monthly_fees}</span>
               </div>
             </div>
           </div>
