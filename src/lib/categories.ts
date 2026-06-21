@@ -12,16 +12,16 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
     "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card", "RedotPay"
   ],
   "Mastercard": [
-    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto"
+    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Uphold Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto", "Bipa"
   ]
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
