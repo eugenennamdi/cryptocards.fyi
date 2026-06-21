@@ -381,19 +381,19 @@ export function CardGrid({ initialCards }: CardGridProps) {
                 </div>
 
                 {/* Premium Badges */}
-                <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+                <div className="flex flex-wrap items-center gap-1.5 mb-4 mt-auto">
                   {(metadata.applePay || metadata.googlePay) && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
-                      <Smartphone className="w-3.5 h-3.5" /> 
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border bg-muted/50 text-[10px] font-bold text-foreground uppercase tracking-wide whitespace-nowrap">
+                      <Smartphone className="w-3 h-3" /> 
                       {metadata.applePay && metadata.googlePay ? 'Apple/Google Pay' : metadata.applePay ? 'Apple Pay' : 'Google Pay'}
                     </span>
                   )}
                   {metadata.custody === 'Self-Custodial' && (
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
-                      <Wallet className="w-3.5 h-3.5" /> Self-Custody
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded border bg-muted/50 text-[10px] font-bold text-foreground uppercase tracking-wide whitespace-nowrap">
+                      <Wallet className="w-3 h-3" /> Self-Custody
                     </span>
                   )}
-                  <span className={`inline-flex items-center px-2 py-1 rounded border text-xs font-bold ${getKycColorClasses(metadata.kyc)}`}>
+                  <span className={`inline-flex items-center px-1.5 py-0.5 rounded border text-[10px] font-bold uppercase tracking-wide whitespace-nowrap ${getKycColorClasses(metadata.kyc)}`}>
                     {metadata.kyc}
                   </span>
                 </div>
