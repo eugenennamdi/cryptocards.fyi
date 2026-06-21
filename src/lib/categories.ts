@@ -3,6 +3,7 @@ export type CardMetadata = {
   kyc: string;
   paymentNetwork: 'Visa' | 'Mastercard' | 'Unknown';
   applePay: boolean;
+  googlePay: boolean;
   custody: 'Self-Custodial' | 'Custodial';
 };
 
@@ -16,6 +17,10 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
 };
 
 export const CARD_APPLE_PAY = [
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto"
+];
+
+export const CARD_GOOGLE_PAY = [
   "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto"
 ];
 
@@ -77,9 +82,10 @@ export function getMetadataForCard(name: string): CardMetadata {
   else if (CARD_PAYMENT_NETWORKS['Mastercard'].includes(name)) paymentNetwork = 'Mastercard';
 
   const applePay = CARD_APPLE_PAY.includes(name);
+  const googlePay = CARD_GOOGLE_PAY.includes(name);
   const custody: 'Self-Custodial' | 'Custodial' = CARD_SELF_CUSTODIAL.includes(name) ? 'Self-Custodial' : 'Custodial';
 
-  return { region, kyc, paymentNetwork, applePay, custody };
+  return { region, kyc, paymentNetwork, applePay, googlePay, custody };
 }
 
 export const CARD_POPULARITY: Record<string, number> = {

@@ -126,9 +126,12 @@ export function CardGrid({ initialCards }: CardGridProps) {
       });
     }
 
-    // Quick Filter: Apple Pay
+    // Quick Filter: Apple/Google Pay
     if (quickFilter === 'apple-pay') {
-      filtered = filtered.filter(card => getMetadataForCard(card.name).applePay);
+      filtered = filtered.filter(card => {
+        const meta = getMetadataForCard(card.name);
+        return meta.applePay || meta.googlePay;
+      });
     }
 
     // Quick Filter: Self-Custody
@@ -375,9 +378,10 @@ export function CardGrid({ initialCards }: CardGridProps) {
 
                 {/* Premium Badges */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {metadata.applePay && (
+                  {(metadata.applePay || metadata.googlePay) && (
                     <span className="inline-flex items-center gap-1 px-2 py-1 rounded border bg-muted/50 text-xs font-bold text-foreground">
-                      <Smartphone className="w-3.5 h-3.5" /> Apple Pay
+                      <Smartphone className="w-3.5 h-3.5" /> 
+                      {metadata.applePay && metadata.googlePay ? 'Apple/Google Pay' : metadata.applePay ? 'Apple Pay' : 'Google Pay'}
                     </span>
                   )}
                   {metadata.custody === 'Self-Custodial' && (
