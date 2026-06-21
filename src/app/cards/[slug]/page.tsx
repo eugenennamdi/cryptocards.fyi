@@ -115,34 +115,34 @@ export default async function CardProfilePage(
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
         {/* Profile Header */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center mb-8">
+        <div className="flex flex-col md:flex-row gap-5 md:gap-6 items-start mb-8">
           {card.logo_url ? (
-            <div className="relative flex-shrink-0">
+            <div className="relative flex-shrink-0 mt-1 md:mt-0 mx-auto md:mx-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent blur-2xl rounded-full" />
               <ImageWithFallback 
                 src={card.logo_url} 
                 alt={card.name} 
-                className="relative w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover ring-1 ring-border/50 shadow-xl shadow-black/5 bg-white"
-                fallbackIconSize={40} 
+                className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover ring-1 ring-border/50 shadow-xl shadow-black/5 bg-white"
+                fallbackIconSize={32} 
               />
             </div>
           ) : (
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl flex-shrink-0 bg-muted flex items-center justify-center ring-1 ring-border/50 shadow-xl shadow-black/5">
-              <CreditCard className="w-8 h-8 md:w-10 md:h-10 text-muted-foreground" />
+            <div className="w-16 h-16 md:w-20 md:h-20 mx-auto md:mx-0 rounded-2xl flex-shrink-0 mt-1 md:mt-0 bg-muted flex items-center justify-center ring-1 ring-border/50 shadow-xl shadow-black/5">
+              <CreditCard className="w-8 h-8 text-muted-foreground" />
             </div>
           )}
           
-          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-0">
-            <div className="flex flex-col md:flex-row items-center md:items-center gap-3 mb-1">
-              <h1 className="text-3xl md:text-4xl font-black tracking-tighter leading-none">
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2.5">
+              <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground">
                 {card.name}
               </h1>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300 text-[11px] font-bold border border-blue-500/20">
                 <ShieldCheck className="w-3.5 h-3.5" /> Editor Vetted
               </span>
             </div>
             {card.description && card.description !== "A popular crypto card offering seamless spending and robust features." && (
-              <p className="text-base text-muted-foreground max-w-2xl line-clamp-2 mb-4 leading-snug">
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl line-clamp-2 mb-4 leading-relaxed">
                 {card.description}
               </p>
             )}
