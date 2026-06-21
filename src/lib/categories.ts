@@ -12,16 +12,16 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
     "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Plutus", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "SolCard", "PintoPay", "Yellow Card", "RedotPay", "Payy", "Uphold Card"
   ],
   "Mastercard": [
-    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Chipper Cash", "Tuyo", "Zypto", "Bipa"
+    "Kast", "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap", "COCA", "Oobit", "Busha", "Tuyo", "Zypto", "Bipa"
   ]
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card", "Avici Money"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card", "Avici Money"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
@@ -42,7 +42,7 @@ export const CARD_REGIONS: Record<string, string[]> = {
     "Oobit", "Fiat24", "Brighty", "Nebeus"
   ],
   "Emerging Markets": [
-    "Yellow Card", "Busha", "Bitsika", "Chipper Cash", "MiniPay", 
+    "Yellow Card", "Busha", "Bitsika", "MiniPay", 
     "Kotani Pay", "VALR", "Bitso", "Lemon Cash", "Ripio", "Belo", 
     "Bipa", "Bit.Store"
   ]
@@ -60,7 +60,7 @@ export const CARD_KYC: Record<string, string[]> = {
     "ThorWallet", "Avici Money", "Tria", "Raincards",
     "Gnosis Pay", "Holyheld", "Bleap", "Plutus", "Bitpanda", "COCA", 
     "Oobit", "Fiat24", "Brighty", "Nebeus",
-    "Yellow Card", "Busha", "Bitsika", "Chipper Cash", "MiniPay", 
+    "Yellow Card", "Busha", "Bitsika", "MiniPay", 
     "Kotani Pay", "VALR", "Bitso", "Lemon Cash", "Ripio", "Belo", 
     "Bipa", "Bit.Store"
   ]
@@ -110,7 +110,6 @@ export const CARD_POPULARITY: Record<string, number> = {
 
   // Tier 3: High Niche / Strong Alternatives
   "Gnosis Pay": 75,
-  "Chipper Cash": 74,
   "Tria": 70,
   "Belo": 68,
   "Ripio": 67,
