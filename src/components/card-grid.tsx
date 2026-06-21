@@ -26,7 +26,7 @@ export function CardGrid({ initialCards }: CardGridProps) {
   const [networkDropdownOpen, setNetworkDropdownOpen] = useState(false);
   const [regionDropdownOpen, setRegionDropdownOpen] = useState(false);
   const [kycDropdownOpen, setKycDropdownOpen] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>('score_desc');
+  const [sortBy, setSortBy] = useState<SortOption>('popular');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
   const router = useRouter();
@@ -145,7 +145,11 @@ export function CardGrid({ initialCards }: CardGridProps) {
       const scoreB = getCompositeScore(b);
 
       switch (sortBy) {
-        case 'score_desc': return scoreB - scoreA;
+        case 'score_desc': 
+          if (scoreB === scoreA) {
+            return getPopularityScore(b.name) - getPopularityScore(a.name); // Tie-breaker
+          }
+          return scoreB - scoreA;
         case 'upvotes': return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
         case 'cashback': 
           const cbA = parseFloat(a.cashback_rate.replace(/[^0-9.]/g, '')) || 0;
