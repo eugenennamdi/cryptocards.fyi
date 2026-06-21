@@ -17,11 +17,11 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card"
+  "Coinbase Card", "Crypto.com Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Plutus", "Kast", "RedotPay", "ether.fi Cash", "Zypto", "Bipa", "Uphold Card", "Bitget Card"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
