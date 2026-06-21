@@ -29,7 +29,8 @@ export const networkIconMap: Record<string, string> = {
   'THORChain': 'https://cryptologos.cc/logos/thorchain-rune-logo.svg',
   'Sonic': 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://soniclabs.com&size=128',
   'Linea': 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://linea.build&size=128',
-  'Payy Network': 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://payy.network&size=128'
+  'Payy Network': 'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://payy.network&size=128',
+  'Plasma': 'https://www.plasma.org/logo-512.png'
 };
 
 export function NetworkBadge({ network }: NetworkBadgeProps) {
