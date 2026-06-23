@@ -12,25 +12,25 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
     "Coinbase Card", "Gnosis Pay", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "RedotPay", "Payy", "Uphold Card", "Plasma One", "Tria", "Kast", "COCA"
   ],
   "Mastercard": [
-    "Etherfi Cash", "Metamask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap"
+    "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap"
   ]
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "Etherfi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Plasma One", "Tria", "COCA"
+  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Plasma One", "Tria", "COCA"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "Etherfi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Tria", "COCA"
+  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Tria", "COCA"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
-  "Gnosis Pay", "Etherfi Cash", "Metamask Card", "Holyheld", "Bleap", "COCA", "Avici Money", "Tria", "Payy"
+  "Gnosis Pay", "ether.fi Cash", "MetaMask Card", "Holyheld", "Bleap", "COCA", "Avici Money", "Tria", "Payy"
 ];
 
 export const CARD_REGIONS: Record<string, string[]> = {
   "Global": [
-    "Kast", "RedotPay", "Etherfi Cash", "Metamask Card", "Coinbase Card", 
+    "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Coinbase Card", 
     "Nexo Card", "Bybit Card", "Bitget Card", 
     "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria", "Payy"
   ],
@@ -44,7 +44,7 @@ export const CARD_KYC: Record<string, string[]> = {
     "Payy"
   ],
   "Standard KYC": [
-    "Kast", "RedotPay", "Etherfi Cash", "Metamask Card", "Coinbase Card", 
+    "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Coinbase Card", 
     "Nexo Card", "Bybit Card", "Bitget Card", 
     "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria"
   ],
@@ -77,11 +77,11 @@ export function getMetadataForCard(name: string): CardMetadata {
 
 export const CARD_POPULARITY: Record<string, number> = {
   "Gnosis Pay": 95,
-  "Etherfi Cash": 90,
+  "ether.fi Cash": 90,
   "Tria": 87,
   "Kast": 85,
   "COCA": 83,
-  "Metamask Card": 80,
+  "MetaMask Card": 80,
   "Avici Money": 78,
   "Holyheld": 75,
   "Bleap": 73,
