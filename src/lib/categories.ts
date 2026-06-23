@@ -9,7 +9,7 @@ export type CardMetadata = {
 
 export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
   "Visa": [
-    "Coinbase Card", "Gnosis Pay", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "RedotPay", "Payy", "Uphold Card", "Plasma One", "Tria", "Kast", "COCA", "Lava", "Infini"
+    "Coinbase Card", "Gnosis Pay", "Wirex", "Bitpanda", "Bitget Card", "Avici Money", "RedotPay", "Payy", "Uphold Card", "Plasma One", "Tria", "Kast", "COCA", "Lava"
   ],
   "Mastercard": [
     "ether.fi Cash", "MetaMask Card", "Nexo Card", "Bybit Card", "Holyheld", "Bleap", "Ready"
@@ -17,22 +17,22 @@ export const CARD_PAYMENT_NETWORKS: Record<string, string[]> = {
 };
 
 export const CARD_APPLE_PAY = [
-  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Plasma One", "Tria", "COCA", "Lava", "Ready", "Infini"
+  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Plasma One", "Tria", "COCA", "Lava", "Ready"
 ];
 
 export const CARD_GOOGLE_PAY = [
-  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Tria", "COCA", "Lava", "Ready", "Infini"
+  "Coinbase Card", "Gnosis Pay", "Nexo Card", "Bybit Card", "Bitpanda", "Wirex", "Kast", "RedotPay", "ether.fi Cash", "Uphold Card", "Bitget Card", "Avici Money", "Tria", "COCA", "Lava", "Ready"
 ];
 
 export const CARD_SELF_CUSTODIAL = [
-  "Gnosis Pay", "ether.fi Cash", "MetaMask Card", "Holyheld", "Bleap", "COCA", "Avici Money", "Tria", "Payy", "Ready", "Infini"
+  "Gnosis Pay", "ether.fi Cash", "MetaMask Card", "Holyheld", "Bleap", "COCA", "Avici Money", "Tria", "Payy", "Ready"
 ];
 
 export const CARD_REGIONS: Record<string, string[]> = {
   "Global": [
     "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Coinbase Card", 
     "Nexo Card", "Bybit Card", "Bitget Card", 
-    "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria", "Payy", "Lava", "Infini"
+    "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria", "Payy", "Lava"
   ],
   "Europe & UK": [
     "Gnosis Pay", "Holyheld", "Bleap", "Bitpanda", "COCA", "Ready"
@@ -46,7 +46,7 @@ export const CARD_KYC: Record<string, string[]> = {
   "Standard KYC": [
     "Kast", "RedotPay", "ether.fi Cash", "MetaMask Card", "Coinbase Card", 
     "Nexo Card", "Bybit Card", "Bitget Card", 
-    "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria", "Lava", "Ready", "Infini"
+    "Uphold Card", "Wirex", "Plasma One", "Avici Money", "Tria", "Lava", "Ready"
   ],
   "Full KYC": [
     "Gnosis Pay", "Holyheld", "Bleap", "Bitpanda", "COCA"
@@ -96,8 +96,7 @@ export const CARD_POPULARITY: Record<string, number> = {
   "Bitpanda": 50,
   "Plasma One": 48,
   "Lava": 47,
-  "Ready": 46,
-  "Infini": 45
+  "Ready": 46
 };
 
 export function getPopularityScore(name: string): number {
